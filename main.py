@@ -31,12 +31,14 @@ async def sendToken(device_token):
     await apns_cert_client.send_notification(request)
 
 
-#db = dataset.connect('postgresql://pushserver:rdbUYT8nFrnMyWwbxRvduikM@localhost:5432/pushserver')
-db = dataset.connect('sqlite:///:memory:')
+db = dataset.connect('postgresql://pushserver:rdbUYT8nFrnMyWwbxRvduikM@localhost:5432/pushserver')
+#db = dataset.connect('sqlite:///:memory:')
+#db = dataset.connect('postgresql://ufbivs448r9cld:pf12a43043cf88b2d44ba0e4242e4c479f4178e83b0c09f24fb25e33e6eba7bc8@ec2-35-169-44-206.compute-1.amazonaws.com:5432/d1b202fii8499b')
 
 @route('/publish/', method='POST')
 def index():
     query = parse_qs(request.body.getvalue().decode('utf-8'))
+    print(query)
     table = db['device']
     streamToken = query["name"][0]
     user = table.find_one(currentStreamToken=streamToken)
