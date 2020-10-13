@@ -6,30 +6,10 @@ import os
 import sys
 
 from apns2.client import APNsClient
-from apns2.payload import Payload
+from apns2.payload import Payload, PayloadAlert
 from urllib.parse import urlsplit, parse_qs
 
 import collections
-
-async def sendToken(device_token):
-    apns_cert_client = APNs(
-        client_cert='./apns-dev-cert.pem',
-        use_sandbox=True,
-    )
-    request = NotificationRequest(
-        device_token=device_token,
-        message = {
-            "aps": {
-                "alert": "Hello from APNs",
-                "badge": "1",
-            }
-        },
-        notification_id=str(uuid4()),  # optional
-        time_to_live=3,                # optional
-        push_type=PushType.ALERT,      # optional
-    )
-    await apns_cert_client.send_notification(request)
-
 
 db = dataset.connect('postgresql://pushserver:rdbUYT8nFrnMyWwbxRvduikM@localhost:5432/pushserver')
 #db = dataset.connect('sqlite:///:memory:')
@@ -48,9 +28,9 @@ def index():
 
     table.update(dict(currentStreamToken=streamToken), ["streamToken"])
     token_hex = user["deviceToken"]
-    payload = Payload(alert=streamToken, sound="default", badge=1, content_available=1)
+    payload = Payload(alert=PayloadAlert(title="Live stream has started", body="View your stream from Wideshot"), custom={"streamToken" : streamToken}, sound="default", badge=1, content_available=1)
     topic = 'com.paubins.LiveVideoShare'
-    client = APNsClient('apns-dev-cert.pem', use_sandbox=True, use_alternative_port=False)
+    client = APNsClient('apns-dev-cert-prod.pem', use_sandbox=False, use_alternative_port=False)
     client.send_notification(token_hex, payload, topic)
 
 @route('/checkStream', method='POST')
@@ -75,9 +55,9 @@ def reset():
         table.update(dict(userID=user_id["userID"], currentStreamToken=""), ['userID'])
 
         token_hex = user_id["deviceToken"]
-        payload = Payload(alert="Stream has ended", sound="default", badge=1, content_available=1)
+        payload = Payload(alert="Wideshot stream has ended", sound="default", badge=1, content_available=1)
         topic = 'com.paubins.LiveVideoShare'
-        client = APNsClient('apns-dev-cert.pem', use_sandbox=True, use_alternative_port=False)
+        client = APNsClient('apns-dev-cert-prod.pem', use_sandbox=False, use_alternative_port=False)
         client.send_notification(token_hex, payload, topic)
  
 @route('/storeStreamToken', method='POST')
