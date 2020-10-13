@@ -70,12 +70,13 @@ def storeStreamToken():
 
 @route('/feedback', method='POST')
 def feedback():
-	device = request.json
-	table = db['device']
-	user_id = table.find_one(userID=device["userID"])
-	if not user_id:
-		table.insert(dict(userID=device["userID"], currentStreamToken="", deviceToken=device["deviceToken"]))
-
+    device = request.json
+    table = db['device']
+    user_id = table.find_one(userID=device["userID"])
+    if not user_id:
+        table.insert(dict(userID=device["userID"], currentStreamToken="", deviceToken=device["deviceToken"]))
+    else:
+        table.update(dict(userID=device["userID"], deviceToken=device["deviceToken"]), ['userID'])
 
 
 run(host='0.0.0.0', port=8080)
