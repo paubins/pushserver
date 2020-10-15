@@ -15,6 +15,10 @@ db = dataset.connect('postgresql://pushserver:rdbUYT8nFrnMyWwbxRvduikM@localhost
 #db = dataset.connect('sqlite:///:memory:')
 #db = dataset.connect('postgresql://ufbivs448r9cld:pf12a43043cf88b2d44ba0e4242e4c479f4178e83b0c09f24fb25e33e6eba7bc8@ec2-35-169-44-206.compute-1.amazonaws.com:5432/d1b202fii8499b')
 
+@route('/vid/<streamToken>', method='GET')
+def get_vid(streamToken):
+    return template("templates/token.html", {"token" : streamToken})
+
 @route('/publish/', method='POST')
 def index():
     query = parse_qs(request.body.getvalue().decode('utf-8'))
