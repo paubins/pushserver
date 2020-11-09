@@ -135,3 +135,7 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 
 STATIC_ROOT = 'static'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
