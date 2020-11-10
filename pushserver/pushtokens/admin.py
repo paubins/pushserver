@@ -11,7 +11,6 @@ import datetime
 def make_send_push_notification(message):
     def send_push_notification(modeladmin, request, queryset):
         device_tokens = list(queryset.values_list('id', flat=True))
-        print(device_tokens)
         push_message_batch.delay(message.pk, device_tokens)
         message.last_sent = datetime.datetime.now()
         message.save()

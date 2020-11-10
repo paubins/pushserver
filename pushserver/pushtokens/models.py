@@ -33,7 +33,7 @@ class PushMessage(models.Model):
 
     push_configuration = models.ForeignKey('PushConfiguration', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
-    body = models.TextField(default="")
+    body = models.TextField(default="", null=True)
     sound = models.CharField(max_length=255, default="default")
     badge = models.BooleanField(default=True)
     content_available = models.BooleanField(default=True)
