@@ -26,7 +26,7 @@ SECRET_KEY = 'tkj#z%9!61xy2o@1c#a4e1wm5xb^bhru0z8vg%v+jlmprktdox'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','paubins.com', 'wideshotapp.com', 'pushserver.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost','paubins.com', 'wideshotapp.com', 'pushserver.com']
 
 
 # Application definition
