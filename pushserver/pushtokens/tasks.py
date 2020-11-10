@@ -28,7 +28,8 @@ def get_push_client(push_message_obj_id, custom=None):
             badge=push_message_obj.badge,
             content_available=push_message_obj.badge)
 
-    payload.body = push_message_obj.body
+    if push_message_obj.body:
+        payload.body = push_message_obj.body
     topic = push_message_obj.push_configuration.topic
     client = APNsClient(push_message_obj.push_configuration.key_file_name, 
         use_sandbox=push_message_obj.push_configuration.use_sandbox,
