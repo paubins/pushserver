@@ -39,13 +39,13 @@ def get_push_client(push_message_obj_id, custom=None):
 
 @shared_task
 def push_message(push_message_obj_id, device_token, custom=None):
-    client, payload, topic = get_push_client(push_message_obj_id, custom=None)
+    client, payload, topic = get_push_client(push_message_obj_id, custom=custom)
     client.send_notification(device_token, payload, topic)
 
 
 @shared_task
 def push_message_batch(push_message_obj_id, device_token_ids, custom=None):
-    client, payload, topic = get_push_client(push_message_obj_id, custom=None)
+    client, payload, topic = get_push_client(push_message_obj_id, custom=custom)
     
     # To send multiple notifications in a batch
     Notification = collections.namedtuple('Notification', ['token', 'payload'])
