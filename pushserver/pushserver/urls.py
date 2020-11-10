@@ -19,9 +19,9 @@ from pushtokens.views import StoreRetrieveDeviceToken, StoreRetrieveStreamToken,
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('store/device', StoreRetrieveDeviceToken.as_view()),
-    path('store/stream', StoreRetrieveStreamToken.as_view()),
-    path('store/reset', ResetStreamToken.as_view()),
+    path('feedback', StoreRetrieveDeviceToken.as_view()),
+    path('storeStreamToken', StoreRetrieveStreamToken.as_view()),
+    path('resetToken', ResetStreamToken.as_view()),
     path('checkStatus', CheckStreamStatus.as_view()),
     path('publish', PublishStreamToken.as_view()),
 ]

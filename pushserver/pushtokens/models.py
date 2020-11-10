@@ -6,9 +6,12 @@ class Token(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
-    device_token = models.CharField(max_length=255, default="")
-    stream_token = models.CharField(max_length=255, default="")
-    user_id = models.CharField(max_length=255, unique=True)
+    device_token = models.CharField(max_length=255, default="", db_column="deviceToken")
+    stream_token = models.CharField(max_length=255, default="", db_column="currentStreamToken")
+    user_id = models.CharField(max_length=255, unique=True, db_column="userID")
+
+    class Meta:
+    	db_table = 'device'
 
 class PushConfiguration(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
