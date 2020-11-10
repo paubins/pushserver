@@ -76,5 +76,5 @@ class CheckStreamStatus(View):
         if user_token and user_token.stream_token:
             is_streaming = True
 
-        # data = serializers.serialize('json', )
-        return JsonResponse({"streaming" : is_streaming})
+        is_streaming_str = "true" if is_streaming else "false"
+        return JsonResponse({"streaming" : is_streaming_str})
