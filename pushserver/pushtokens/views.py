@@ -6,6 +6,8 @@ from .models import Token, PushMessage
 from .tasks import push_message
 import json
 
+from django.http import JsonResponse
+
 class PublishStreamToken(View):
     def post(self, request, *args, **kwargs):
         stream_token = request.POST['name']
@@ -75,4 +77,4 @@ class CheckStreamStatus(View):
             is_streaming = True
 
         # data = serializers.serialize('json', )
-        return HttpResponse(json.dumps({"streaming" : is_streaming}))
+        return JsonResponse({"streaming" : is_streaming})
