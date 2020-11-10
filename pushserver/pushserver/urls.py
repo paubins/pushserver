@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from pushtokens.views import StoreRetrieveDeviceToken, StoreRetrieveStreamToken, ResetStreamToken, CheckStreamStatus, PublishStreamToken
+from pushtokens.views import StoreRetrieveDeviceToken, StoreRetrieveStreamToken, ResetStreamToken, CheckStreamStatus, PublishStreamToken, get_stream
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +24,5 @@ urlpatterns = [
     path('resetToken/', ResetStreamToken.as_view()),
     path('checkStream', CheckStreamStatus.as_view()),
     path('publish/', PublishStreamToken.as_view()),
+    path('s/<streamToken>', get_stream),
 ]

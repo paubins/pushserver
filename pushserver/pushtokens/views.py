@@ -8,6 +8,10 @@ import json
 
 from django.http import JsonResponse
 
+
+def get_stream(request, streamToken=None):
+    return render(request, "token.html", {"token" : streamToken})
+
 class PublishStreamToken(View):
     def post(self, request, *args, **kwargs):
         stream_token = request.POST['name']

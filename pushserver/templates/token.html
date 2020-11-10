@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width'>
+<noscript>
+	<meta http-equiv="refresh" content="0;url=http://www.wideshotapp.com/hls/{{token}}/index.m3u8" />
+</noscript>
+
+<!-- Begin Facebook tags -->
+<meta property="og:title" content="Join my Wideshot" />
+<meta property="og:url" content="https://www.wideshotapp.com/hls/{{token}}/index.m3u8" />
+<meta property="og:description" content="Someone is streaming their screen from Wideshot" />
+<meta property="og:image" content="https://wideshot.s3.amazonaws.com/wideshot.png" />
+<meta property="og:type" content="video" />
+<meta property="og:video" content="https://www.wideshotapp.com/hls/{{token}}/index.m3u8" />
+<meta property="og:video:secure_url" content="https://www.wideshotapp.com/hls/{{token}}/index.m3u8" />
+<meta property="og:video:type" content="application/vnd.apple.mpegurl" />
+<meta property="og:video:width" content="480" />
+<meta property="og:video:height" content="858" />
+
+<!-- End Facebook tags -->
+
+<!-- Begin Twitter tags -->
+<meta name="twitter:title" content="Stream {{token}}" />
+<meta name="twitter:url" content="http://www.wideshotapp.com/hls/{{token}}/index.m3u8" />
+<meta name="twitter:card" content="Someone is streaming their screen from Wideshot" />
+<meta name="twitter:image" content="https://wideshot.s3.amazonaws.com/wideshot.png" />
+<!-- End Twitter tags -->
+
+  <title>Live stream</title>
+  <style> body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; padding:1em; } 
+html, body {
+  margin: 0;
+}
+#wrapper{
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+#featured {
+  position: absolute;
+  width: calc(100vh * (1000 / 562));    /*  video width / height  */
+  height: calc(100vw * (562 / 1000));   /*  video height / width  */
+  min-width: 100%;
+  min-height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+</style>
+</head>
+<body>
+<script src="https://hls-js.netlify.app/dist/hls.js"></script>
+<!-- Or if you want a more recent alpha version -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@alpha"></script> -->
+
+<div id="wrapper">
+  <div id="featured">
+    <video id="video" muted="muted"></video>
+  </div>
+</div>
+
+<script>
+  var video = document.getElementById('video');
+  var videoSrc = 'https://www.wideshotapp.com/hls/{{token}}/index.m3u8';
+  //
+  // First check for native browser HLS support
+  //
+  if (video.canPlayType('application/vnd.apple.mpegurl')) {
+  	window.location.href = "https://www.wideshotapp.com/hls/{{token}}/index.m3u8";
+  } else if (Hls.isSupported()) {
+    var hls = new Hls();
+    hls.loadSource(videoSrc);
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED, function() {
+      video.play();
+    });
+  }
+</script>
+
+</body>
+</html>
