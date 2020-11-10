@@ -24,9 +24,5 @@ class Migration(migrations.Migration):
             model_name='token',
             name='user_id',
             field=models.CharField(db_column='userID', max_length=255, unique=True),
-        ),
-        migrations.AlterModelTable(
-            name='token',
-            table='device',
-        ),
+        )
     ]
