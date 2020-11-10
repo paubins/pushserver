@@ -68,7 +68,6 @@ class CheckStreamStatus(View):
     def post(self, request, *args, **kwargs):
         received_json_data = json.loads(request.body)
         user_id = received_json_data['userID']
-        device_token = received_json_data['deviceToken']
         is_streaming = False
 
         user_token = Token.objects.get(user_id=user_id)
