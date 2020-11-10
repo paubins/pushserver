@@ -34,7 +34,7 @@ class PushMessage(models.Model):
     sound = models.CharField(max_length=255, default="default")
     badge = models.BooleanField(default=True)
     content_available = models.BooleanField(default=True)
-    identifer = models.CharField(max_length=255, unique=True)
+    identifier = models.CharField(max_length=255, unique=True)
 
     last_sent = models.DateTimeField(null=True)
 
