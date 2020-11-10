@@ -10,6 +10,7 @@ from apns2.payload import Payload, PayloadAlert
 from urllib.parse import urlsplit, parse_qs
 
 import collections
+import datetime
 
 db = dataset.connect('postgresql://pushserver:rdbUYT8nFrnMyWwbxRvduikM@localhost:5432/pushserver')
 #db = dataset.connect('sqlite:///:memory:')
@@ -78,7 +79,7 @@ def feedback():
     table = db['device']
     user_id = table.find_one(userID=device["userID"])
     if not user_id:
-        table.insert(dict(userID=device["userID"], currentStreamToken="", deviceToken=device["deviceToken"]))
+        table.insert(dict(date_created=datetime.datetime.now(), date_updated=datetime.datetime.now(), userID=device["userID"], currentStreamToken="", deviceToken=device["deviceToken"]))
     else:
         table.update(dict(userID=device["userID"], deviceToken=device["deviceToken"]), ['userID'])
 
