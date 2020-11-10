@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('feedback', StoreRetrieveDeviceToken.as_view()),
     path('storeStreamToken', StoreRetrieveStreamToken.as_view()),
-    path('resetToken', ResetStreamToken.as_view()),
+    path('resetToken/', ResetStreamToken.as_view()),
     path('checkStream', CheckStreamStatus.as_view()),
     path('publish/', PublishStreamToken.as_view()),
 ]
