@@ -28,7 +28,7 @@ def make_send_push_notification(message):
 @admin.register(Token)
 class TokenAdmin(admin.ModelAdmin):
     list_display = ['date_created', 'date_updated', 'user_id', 'device_token', 'stream_token']
-    search_fields = ['device_token']
+    search_fields = ['user_id', 'device_token']
 
     def get_actions(self, request):
         actions = super().get_actions(request)
