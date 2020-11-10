@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 from pushtokens.views import StoreRetrieveDeviceToken, StoreRetrieveStreamToken, ResetStreamToken, CheckStreamStatus, PublishStreamToken, get_stream
 
 urlpatterns = [
@@ -25,4 +27,4 @@ urlpatterns = [
     path('checkStream', CheckStreamStatus.as_view()),
     path('publish/', PublishStreamToken.as_view()),
     path('s/<streamToken>', get_stream),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
