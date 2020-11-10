@@ -124,6 +124,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
 
 
 CELERY_RESULT_BACKEND = 'django-db'
@@ -135,6 +136,3 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
