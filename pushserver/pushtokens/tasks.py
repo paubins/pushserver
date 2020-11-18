@@ -16,20 +16,20 @@ def debug_task(self):
 def get_push_client(push_message_obj_id, custom=None):
     push_message_obj = PushMessage.objects.get(pk=push_message_obj_id)
     payload = None
+    payload_alert = PayloadAlert(title=push_message_obj.title, body=push_message_obj.body)
     if custom:
-        payload = Payload(alert=push_message_obj.title,
+        payload = Payload(alert=payload_alert,
             sound=push_message_obj.sound,
-            badge=push_message_obj.badge,
+            badge=1 if push_message_obj.badge else 0,
             custom=custom,
-            content_available=push_message_obj.badge)
+            content_available=1 if push_message_obj.content_available else 0)
     else:
-        payload = Payload(alert=push_message_obj.title,
+        payload = Payload(alert=payload_alert,
             sound=push_message_obj.sound,
-            badge=push_message_obj.badge,
-            content_available=push_message_obj.badge)
+            badge=1 if push_message_obj.badge else 0,
+            content_available=1 if push_message_obj.content_available else 0)
 
-    if push_message_obj.body:
-        payload.body = push_message_obj.body
+
     topic = push_message_obj.push_configuration.topic
     client = APNsClient(push_message_obj.push_configuration.key_file_name, 
         use_sandbox=push_message_obj.push_configuration.use_sandbox,
