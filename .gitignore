@@ -8,3 +8,4 @@ venv
 *.json
 *.sqlite3
 *.rdb
+*.cer
