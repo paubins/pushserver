@@ -1,0 +1,10 @@
+venv
+*.pyc
+*.pem
+*.p12
+*.certSigningRequest
+*.p7b
+*.dump
+*.json
+*.sqlite3
+*.rdb
