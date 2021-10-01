@@ -1,2 +1,4 @@
 venv
 *.pyc
+*.pem
+*.p12
