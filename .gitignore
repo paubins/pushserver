@@ -2,3 +2,5 @@ venv
 *.pyc
 *.pem
 *.p12
+*.certSigningRequest
+*.p7b
